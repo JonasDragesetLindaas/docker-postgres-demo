@@ -20,6 +20,22 @@ services:
     networks:
       - network 
 
+  # Configuration for Spring Boot application
+  backend:
+    container_name: spring-boot-test-app
+    build: 
+      context: /backend
+      dockerfile: Dockerfile
+    environment:
+      - DB_PORT=${DB_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+    ports:
+      - 8080:8080
+    networks:
+      - network
+
 volumes:
   db-data:
 secrets:
