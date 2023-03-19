@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  # Configuration for PostgreSQL database
+  db: 
+    container_name: postgrest-db
+    image: postgres
+    secrets:
+      - db_password
+    volumes: 
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    networks:
+      - network 
