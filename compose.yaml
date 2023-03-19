@@ -6,7 +6,7 @@ services:
     container_name: postgrest-db
     image: postgres
     secrets:
-      - db_password
+      - db-password
     volumes: 
       - db-data:/var/lib/postgresql/data
     environment:
@@ -19,3 +19,12 @@ services:
       - 5432:5432
     networks:
       - network 
+
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
+networks:
+  network:
+    driver: bridge
